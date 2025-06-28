@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1" >
+  <title>Editor de Site</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.0.0/dist/tailwind.min.css" rel="stylesheet" >
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:,">
+</head>
+
+<body>
+  <div class="editor-container">
+    <div class="unified-editor-container">
+      <div class="editor-section">
+        <div class="flex justify-between mb-3">
+          <button id="tab-header" class="bg-gray-700 hover:bg-gray-600 w-1/5">Cabeçalho</button>
+          <button id="tab-menu" class="bg-gray-700 hover:bg-gray-600 w-1/5">Menu</button>
+          <button id="tab-gallery" class="bg-gray-700 hover:bg-gray-600 w-1/5">Galeria</button>
+          <button id="tab-form" class="bg-gray-700 hover:bg-gray-600 w-1/5">Formulário</button>
+          <button id="tab-footer" class="bg-gray-700 hover:bg-gray-600 w-1/5">Rodapé</button>
+          <button id="tab-export" class="bg-gray-700 hover:bg-gray-600 w-1/5">Exportar</button>
+          <button id="tab-apis" class="bg-gray-700 hover:bg-gray-600 w-1/5">Editor API</button>
+        </div>
+      </div>
+      
+      <div id="editor-header" class="editor-container" style="display: none;">
+        <div class="editor-section">
+          <h2>Editor de Cabeçalho</h2>
+          <label for="header-bg-color">Cor de Fundo do Cabeçalho:</label>
+          <input type="color" id="header-bg-color" value="#f0f0f0" >
+
+          <label for="header-text-color">Cor do Texto do Cabeçalho:</label>
+          <input type="color" id="header-text-color" value="#000000" >
+
+          <label for="header-item-bg-color">Cor de Fundo dos Itens do Cabeçalho:</label>
+          <input type="color" id="header-item-bg-color" value="#ffffff" >
+
+          <label for="header-item-border-radius">Raio da Borda dos Itens:</label>
+          <input type="number" id="header-item-border-radius" value="3" min="0" >
+
+          <label for="header-item-spacing">Espaçamento entre Itens (máximo 80px):</label>
+          <input type="number" id="header-item-spacing" value="15" min="0" max="80" >
+
+          <label for="header-height">Altura do Cabeçalho (mínimo 30px, máximo 80px):</label>
+          <input type="number" id="header-height" value="60" min="30" max="80" >
+
+          <label for="header-align-items">Alinhar Itens:</label>
+          <select id="header-align-items">
+            <option value="left">Esquerda</option>
+            <option value="center">Centro</option>
+            <option value="right">Direita</option>
+          </select>
+
+          <label for="header-text">Texto do Cabeçalho:</label>
+          <input type="text" id="header-text" placeholder="Digite o texto do cabeçalho" >
+
+          <label>Imagem de Cabeçalho:</label>
+          <button id="toggle-header-logo-btn">Ativar Imagem de Cabeçalho</button>
+          <label for="header-logo-file">Selecionar Imagem de Cabeçalho:</label>
+          <input type="file" id="header-logo-file" accept="image/*" >
+        </div>
+      </div>
+
+      <div id="editor-menu" class="editor-container" style="display: none;">
+        <div class="editor-section">
+          <h2>Editor de Menu</h2>
+          <label for="menu-bg-color">Cor de Fundo do Menu:</label>
+          <input type="color" id="menu-bg-color" value="#2a2a2a" >
+          
+          <label for="menu-text-color">Cor do Texto do Menu:</label>
+          <input type="color" id="menu-text-color" value="#ffffff" >
+          
+          <label for="menu-item-bg-color">Cor de Fundo dos Itens do Menu:</label>
+          <input type="color" id="menu-item-bg-color" value="#333333" >
+          
+          <label for="menu-item-border-radius">Raio da Borda dos Itens:</label>
+          <input type="number" id="menu-item-border-radius" value="3" min="0" >
+          
+          <label for="menu-item-spacing">Espaçamento entre Itens (máximo 80px):</label>
+          <input type="number" id="menu-item-spacing" value="15" min="0" max="80" >
+          
+          <label for="menu-height">Altura do Menu (mínimo 20px, máximo 40px):</label>
+          <input type="number" id="menu-height" value="20" min="20" max="40" >
+          
+          <label for="align-items">Alinhar Itens:</label>
+          <select id="align-items">
+            <option value="left">Esquerda</option>
+            <option value="center">Centro</option>
+            <option value="right">Direita</option>
+          </select>
+          
+          <label for="add-item">Adicionar Item ao Menu:</label>
+          <input type="text" id="add-item" placeholder="Nome do Item" >
+          <button id="add-item-btn">Adicionar</button>
+          <button id="clear-items-btn">Limpar Itens</button>
+          
+          <label>Botão Logotipo:</label>
+          <button id="toggle-logo-btn">Ativar Logotipo</button>
+          <label for="logo-file">Selecionar Logotipo (Imagem):</label>
+          <input type="file" id="logo-file" accept="image/*" >
+        </div>
+      </div>
+
+      <div id="editor-gallery" class="editor-container" style="display: none;">
+        <div class="editor-section">
+          <h2>Editor de Galeria</h2>
+          <button class="btn-add-card" id="add-card-btn">Adicionar Card</button>
+
+          <label for="card-bg-color">Cor de Fundo dos Cards:</label>
+          <input type="color" id="card-bg-color" value="#eeeeee" >
+
+          <label for="card-border-color">Cor da Borda dos Cards:</label>
+          <input type="color" id="card-border-color" value="#bbbbbb" >
+
+          <label for="card-border-radius">Raio da Borda dos Cards:</label>
+          <input type="number" id="card-border-radius" value="5" min="0" >
+
+          <label for="card-width">Largura dos Cards (px):</label>
+          <input type="number" id="card-width" value="200" min="50" max="500" >
+
+          <label for="card-height">Altura dos Cards (px):</label>
+          <input type="number" id="card-height" value="280" min="50" max="600" >
+
+          <label for="card-text-bg-color">Cor de Fundo dos Textos:</label>
+          <input type="color" id="card-text-bg-color" value="#ffffff" >
+
+          <label for="card-text-color">Cor do Texto dos Cards:</label>
+          <input type="color" id="card-text-color" value="#000000" >
+
+          <label for="card-text-font-size">Tamanho da Fonte dos Textos (px):</label>
+          <input type="number" id="card-text-font-size" value="14" min="8" max="30" >
+
+          <label for="gallery-spacing">Espaçamento entre Cards (px):</label>
+          <input type="number" id="gallery-spacing" value="15" min="0" max="40" >
+
+          <label for="gallery-align">Alinhar Cards:</label>
+          <select id="gallery-align">
+            <option value="flex-start">Esquerda</option>
+            <option value="center">Centro</option>
+            <option value="flex-end">Direita</option>
+          </select>
+        </div>
+      </div>
+
+
+      <div id="editor-form" style="display: none;">
+        <div class="editor-section" id="form-editor">
+          <h2>Editor de Formulário</h2>
+
+          <label for="form-title-input">Título do Formulário:</label>
+          <input type="text" id="form-title-input" placeholder="Digite o título do formulário" value="Formulário de Contato" >
+
+          <label for="form-bg-color">Cor de Fundo do Formulário:</label>
+          <input type="color" id="form-bg-color" value="#f5f5f5" >
+
+          <label for="form-border-color">Cor da Borda do Formulário:</label>
+          <input type="color" id="form-border-color" value="#cccccc" >
+
+          <label for="form-border-radius">Raio da Borda do Formulário:</label>
+          <input type="number" id="form-border-radius" value="5" min="0" >
+
+          <label for="form-title-color">Cor do Título:</label>
+          <input type="color" id="form-title-color" value="#333333" >
+
+          <label for="form-label-color">Cor do Título do Campo:</label>
+          <input type="color" id="form-label-color" value="#333333" >
+
+          <label for="form-field-bg-color">Cor do Campo:</label>
+          <input type="color" id="form-field-bg-color" value="#ffffff" >
+
+          <button class="btn-add-field" id="add-form-field-btn">Adicionar Campo</button>
+
+          <div id="field-properties-editor" style="display: none;">
+            <hr class="section-divider">
+            <h3 style="color: #fff; font-size: 16px; margin: 10px 0;">Propriedades do Campo</h3>
+            
+            <label for="field-label-input">Label do Campo:</label>
+            <input type="text" id="field-label-input" placeholder="Digite a label do campo" >
+            
+            <label for="field-type-select">Tipo do Campo:</label>
+            <select id="field-type-select">
+              <option value="text">Texto</option>
+              <option value="email">E-mail</option>
+              <option value="password">Senha</option>
+              <option value="number">Número</option>
+              <option value="tel">Telefone</option>
+              <option value="date">Data</option>
+              <option value="select">Lista de Seleção</option>
+              <option value="radio">Botões de Opção</option>
+              <option value="textarea">Área de Texto</option>
+            </select>
+            
+            <div id="options-container" style="display: none;">
+              <label for="field-options-input">Opções (separadas por vírgula):</label>
+              <input type="text" id="field-options-input" placeholder="Opção 1, Opção 2, Opção 3" >
+            </div>
+            
+            <label for="field-required-check">Campo Obrigatório:</label>
+            <input type="checkbox" id="field-required-check" 
+            >
+            
+            <div class="button-row">
+              <button id="update-field-btn">Atualizar Campo</button>
+              <button id="cancel-field-edit-btn">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--  Rodapé -->
+      <div id="editor-footer" style="display: none;">
+        <div class="editor-section" id="footer-editor">
+          <h2>Editor de Rodapé</h2>
+
+          <label for="footer-text">Texto do Rodapé:</label>
+          <textarea id="footer-text" rows="3">© 2025 Iuri Seifriz. Todos os direitos reservados.</textarea>
+
+          <label for="footer-font-size">Tamanho da Fonte (px):</label>
+          <input type="number" id="footer-font-size" value="14" min="8" max="40">
+
+          <label for="footer-text-color">Cor do Texto:</label>
+          <input type="color" id="footer-text-color" value="#ffffff">
+
+          <label for="footer-bg-color">Cor de Fundo:</label>
+          <input type="color" id="footer-bg-color" value="#2a2a2a">
+
+          <label for="footer-align">Alinhamento:</label>
+          <select id="footer-align">
+            <option value="left">Esquerda</option>
+            <option value="center" selected>Centro</option>
+            <option value="right">Direita</option>
+          </select>
+        </div>
+      </div>
+
+      <!--  exportar-->
+       <div id="editor-export" style="display: none;">
+        <div class="editor-section">
+          <h2>Exportar Site</h2>
+          
+          <div class="button-row">
+            <button id="show-code-btn" class="action-button">Mostrar Código</button>
+            <button id="save-code-btn" class="save-button">Salvar Código</button>
+          </div>
+          
+          <div class="button-row">
+            <button id="load-code-btn" class="load-button">Carregar Salvo</button>
+            <button id="clear-code-btn" class="clear-button">Limpar Salvo</button>
+          </div>
+          
+          <div id="status-message" class="status-message"></div>
+          
+          <div id="code-preview" class="code-preview" style="display:none;"></div>
+        </div>
+      </div>
+
+  
+    
+      <div id="editor-apis" class="editor" style="display: none;">
+        <h3>Integração com APIs</h3>
+        <button id="fetch-apis-btn" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
+          Carregar Dados das APIs
+        </button>
+      </div>
+    </div>
+  </div>
+  
+<div class="generated-menu-container">
+  <div id="generated-header" class="generated-header"></div>
+  <div id="generated-menu" class="generated-menu">
+    <div id="menu-list" class="menu-items"></div>
+  </div>
+  <div id="gallery-container" class="gallery-container"></div>
+  <div id="form-container" class="form-container"></div>
+  <div id="generated-footer" class="generated-footer">
+    © 2025 Iuri Seifriz. Todos os direitos reservados.
+  </div>
+
+  <!-- Seção de resultados das APIs -->
+  <div id="api-results" class="api-results mt-6">
+    <h3>Resultados das APIs</h3>
+    <div id="api-dolar" class="api-result"></div>
+    <div id="api-hungria" class="api-result"></div>
+    <div id="api-tempo" class="api-result"></div>
+    <div id="api-bitcoin" class="api-result"></div>
+  </div>
+</div> <!-- Fechamento correto da div principal -->
+
+<script type="module" src="/js/main.js"></script>
+
+</body>
+</html>
